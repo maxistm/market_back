@@ -2,16 +2,18 @@ import psycopg2, time
 from psycopg2 import Error
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 from datetime import datetime
+import sett
+
 
 # Подключение к существующей базе данных
 def connect():
 
     try:
-        connection = psycopg2.connect(user="postgres",
-                                    password="postgres",
-                                    host="127.0.0.1",
-                                    port="5432",
-                                    database="tickets_db")
+        connection = psycopg2.connect(user=sett.db_param['user'],
+                                    password=sett.db_param['password'],
+                                    host=sett.db_param['host'],
+                                    port=sett.db_param['port'],
+                                    database=sett.db_param['database'])
 
         cursor = connection.cursor()
         return connection, cursor
